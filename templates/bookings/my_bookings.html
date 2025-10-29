@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+<head><title>My Bookings</title></head>
+<body>
+  <h1>My Bookings</h1>
+  <ul>
+    {% for b in bookings %}
+      <li>{{ b.trip.title }} — Seats: {{ b.seats_booked }} — Booked at: {{ b.booked_at }}</li>
+    {% empty %}
+      <li>You have no bookings yet.</li>
+    {% endfor %}
+  </ul>
+  <p><a href="{% url 'trips:trip_list' %}">Browse trips</a></p>
+</body>
+</html>
