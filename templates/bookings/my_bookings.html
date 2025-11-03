@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}My Bookings{% endblock %}
+
+{% block content %}
+  <h1>My Bookings</h1>
+
+  {% if bookings %}
+    <table style="width:100%;border-collapse:collapse">
+      <thead>
+        <tr>
+          <th style="text-align:left;padding:8px;border-bottom:1px solid #ddd">Trip</th>
+          <th style="text-align:left;padding:8px;border-bottom:1px solid #ddd">Seats</th>
+          <th style="text-align:left;padding:8px;border-bottom:1px solid #ddd">Booked at</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for b in bookings %}
+        <tr>
+          <td style="padding:8px;border-bottom:1px solid #eee">{{ b.trip.title }} — {{ b.trip.destination }}</td>
+          <td style="padding:8px;border-bottom:1px solid #eee">{{ b.seats_booked }}</td>
+          <td style="padding:8px;border-bottom:1px solid #eee">{{ b.booked_at|date:"M j, Y H:i" }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <div class="card">You have no bookings yet. Browse trips and book one!</div>
+  {% endif %}
+{% endblock %}

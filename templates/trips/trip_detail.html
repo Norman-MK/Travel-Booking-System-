@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head><title>{{ trip.title }}</title></head>
+<body>
+  <h1>{{ trip.title }}</h1>
+  <p>{{ trip.description }}</p>
+  <p>Destination: {{ trip.destination }}</p>
+  <p>Price: ${{ trip.price }}</p>
+  <p>Seats available: {{ trip.available_seats }}</p>
+
+  <form method="post" action="{% url 'bookings:create_booking' %}">
+    {% csrf_token %}
+    <input type="hidden" name="trip_id" value="{{ trip.id }}">
+    <label>Seats: <input type="number" name="seats" value="1" min="1" max="{{ trip.available_seats }}"></label>
+    <button type="submit">Book</button>
+  </form>
+
+  <p><a href="{% url 'trips:trip_list' %}">Back to list</a></p>
+</body>
+</html>
