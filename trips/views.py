@@ -1,6 +1,12 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Trip
 
+from django.shortcuts import render
+
+def project_home(request):
+    return render(request, 'travel_site/index.html')
+
+
 def trip_list(request):
     trips = Trip.objects.order_by('start_date')
     return render(request, 'trips/trip_list.html', {'trips': trips})
