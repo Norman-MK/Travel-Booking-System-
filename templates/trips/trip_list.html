@@ -1,18 +1,23 @@
-<!doctype html>
-<html>
-<head><title>Available Trips</title></head>
-<body>
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}Available Trips{% endblock %}
+
+{% block content %}
   <h1>Available Trips</h1>
-  <ul>
+  <div class="card-grid">
     {% for trip in trips %}
-      <li>
-        <a href="{% url 'trips:trip_detail' trip.pk %}">
-          {{ trip.title }} — {{ trip.destination }} ({{ trip.start_date }}) - ${{ trip.price }}
-        </a>
-      </li>
+      <div class="card">
+        <h3>{{ trip.title }}</h3>
+        <div class="muted">{{ trip.destination }}</div>
+        <p>{{ trip.description|default:"No description" }}</p>
+        <div class="meta">Start: {{ trip.start_date|date:"M j, Y" }} • Seats: {{ trip.available_seats }}</div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <div class="btn">${{ trip.price|floatformat:2|intcomma }}</div>
+          <a class="btn" href="{% url 'trips:trip_detail' trip.pk %}" style="margin-left:auto">View</a>
+        </div>
+      </div>
     {% empty %}
-      <li>No trips available yet.</li>
+      <div class="card">No trips available yet.</div>
     {% endfor %}
-  </ul>
-</body>
-</html>
+  </div>
+{% endblock %}

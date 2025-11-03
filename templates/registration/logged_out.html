@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Logged out{% endblock %}
+
+{% block content %}
+  <div style="max-width:700px;margin:24px auto;padding:18px;background:#fff;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.05);">
+    <h2>Logged out successfully</h2>
+    <p>You have been logged out. For security, consider closing your browser on a shared computer.</p>
+
+    <p>
+      <a class="btn" href="{% url 'login_short' %}">Log in again</a>
+      <a class="btn secondary" href="{% url 'trips:trip_list' %}" style="margin-left:8px">Browse trips</a>
+    </p>
+  </div>
+{% endblock %}

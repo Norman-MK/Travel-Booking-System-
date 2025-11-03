@@ -20,5 +20,5 @@ def create_booking(request):
 
 @login_required
 def my_bookings(request):
-    bookings = Booking.objects.filter(user=request.user)
+    bookings = Booking.objects.filter(user=request.user).order_by('-booked_at')
     return render(request, 'bookings/my_bookings.html', {'bookings': bookings})
